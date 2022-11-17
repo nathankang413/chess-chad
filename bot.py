@@ -9,7 +9,7 @@ class Bot:
         """
         pass
 
-    def get_eval(self, board: list[list], turn: bool, check: int) -> str:
+    def get_eval(self, board: list[list], turn: bool, check: int) -> float:
         """
         Returns a numeric evaluation of the game state
         Positive evaluations mean that white is better, negative means black is better
