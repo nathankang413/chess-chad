@@ -1,3 +1,5 @@
+from config import *
+
 class Game:
     """
     A data structure to maintain and update the game state of a chess game
@@ -9,8 +11,13 @@ class Game:
         Sets the board to the default starting positions
         Sets the turn to white
         Saves the entire history of the game
+
+        board - may be string encoding of board (FEN) or a matrix of piece positions
+        turn - True if white to play
         """
-        pass
+        self.set_state(board or DEFAULT_BOARD, turn)
+
+        # TODO: init history?
 
     def set_state(self, board, turn: bool) -> None:
         """
@@ -18,6 +25,27 @@ class Game:
         Resets the game history
         board - may be string encoding of board (FEN) or a matrix of piece positions
         turn - True if white to play
+        """
+        self.board = self.FEN_to_board(board) or board
+        if not self.check_valid_board(self.board):
+            raise ValueError("Invalid board")
+        self.turn = turn
+
+    def get_board(self) -> list[list]:
+        """
+        Returns a matrix of piece positions
+        """
+        return self.board
+
+    def get_turn(self) -> bool:
+        """
+        Returns whether it is white to move
+        """
+        return self.turn
+
+    def get_check(self) -> int:
+        """
+        Returns whether player is in check
         """
         pass
 
@@ -37,14 +65,30 @@ class Game:
         """
         pass
 
-    def get_board(self) -> list[list]:
-        """
-        Returns a matrix of piece positions
-        """
-        pass
-
     def get_history(self) -> list:  # TODO: maybe make a data structure for this? because it might have to remember a different starting position
         """
         Returns the history of the game
+        """
+        pass
+
+    def FEN_to_board(self, fen: str) -> list[list]:
+        """
+        Returns a matrix of piece positions from a FEN string encoding
+        Returns None if FEN string is invalid
+        """
+        pass
+
+    def board_to_FEN(self, board: list[list]) -> str:
+        """
+        Returns the FEN encoding of the given board
+        Assumes board is valid  # TODO: maybe not? - probably need to raise an error or return none
+        """
+        pass
+
+    def check_valid_board(self, board: list[list]) -> bool:
+        """
+        Returns whether the board is valid:
+        - 8 x 8
+        - all spaces are either empty string or one char representing a piece
         """
         pass
