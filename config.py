@@ -6,3 +6,16 @@ CHECK = 1
 CHECK_MATE = 2
 
 HUMAN_PLAYER = True
+
+DEFAULT_BOARD = [  # uppercase - white, lowercase - black
+    ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+    ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+    ['']*8,
+    ['']*8,
+    ['']*8,
+    ['']*8,
+    ['']*8,
+    ['']*8,
+    ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+    ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+]
