@@ -13,7 +13,15 @@ class UserInterface:
         game - a game data structure to maintain and update the state and history of the game
         players - (white_player, black_player) - players may be a HUMAN_PLAYER or a Bot object
         """
-        pass
+        if type(game) == Game:
+            self.game = game
+        else:
+            raise ValueError("game should be a Game object")
+
+        if type(players) == tuple and len(players) == 2:  # TODO: may need extra check for types of the players
+            self.players = players
+        else:
+            raise ValueError("players should be a tuple of players")
 
     def set_game(self, game: Game) -> None:
         """
