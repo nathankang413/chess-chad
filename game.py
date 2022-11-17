@@ -83,7 +83,26 @@ class Game:
         Returns the FEN encoding of the given board
         Assumes board is valid  # TODO: maybe not? - probably need to raise an error or return none
         """
-        pass
+        fen = ""  # Starts by opening an empty string for encoding the board state
+
+        if not self.check_valid_board(self.board):  # checks validity of board state and throws an error code if invalid
+            raise ValueError("Invalid board")
+
+        for row in board:
+            gap = 0  # Sets gap counter to zero; used in printing gaps between pieces into the FEN string
+
+            for token in row:
+                if token == '':  # If the space is empty, adds one count to the gap tracker
+                    gap += 1
+                else:  # Adds the current token to fen string with the gap count before it (if there is one)
+                    fen += f"{gap if gap != 0 else ''}{token}"
+                    gap = 0  # Resets gap to zero when a token is found (Yes Nathan, I know it does this everytime)
+
+            if gap != 0:  # At the end of the line, makes sure to add the gap if there is one
+                fen += f"{gap}"
+            fen += "/"  # Adds the "/" as next-row notation in FEN
+
+        return fen[:-1]  # Returns the FEN encoding but without the "/" that gets attached at the end
 
     def check_valid_board(self, board: list[list]) -> bool:
         """
@@ -91,4 +110,21 @@ class Game:
         - 8 x 8
         - all spaces are either empty string or one char representing a piece
         """
-        pass
+        valid_tokens = ['', 'r', 'n', 'b', 'q', 'k', 'p']  # lowercase version of all acceptable tokens on the board
+
+        if not isinstance(board, list) or not all(isinstance(element, list) for element in board):  # Checks to make sure the board is the correct data structure to begin with
+            return False
+
+        if len(board) != 8:  # Checks the correct number of rows in the board
+            return False
+
+        for row in board:  # Checks the correct number of spaces in each row
+            if len(row) != 8:
+                return False
+
+        for row in board:  # Runs through every position to check only valid tokens are present
+            for position in row:
+                if type(position) is not str or position.lower() not in valid_tokens:
+                    return False
+
+        return True  # If all previous checks for invalidity have passed, returns True
