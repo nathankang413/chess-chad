@@ -63,6 +63,9 @@ class Game:
 
         return bool - True if move was legal and made, False if illegal move
         """
+        # check if move is legal
+        # update board
+        # update turn
         pass
 
     def get_history(self) -> list:  # TODO: maybe make a data structure for this? because it might have to remember a different starting position

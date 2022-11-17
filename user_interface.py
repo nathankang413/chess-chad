@@ -59,4 +59,7 @@ class UserInterface:
         Handles I/O with the user
         Handles interfacing with chess engine
         """
-        pass
+        if self.game is None:
+            raise RuntimeError(f'game has not been set')
+        if self.players is None:
+            raise RuntimeError(f'players has not been set')
