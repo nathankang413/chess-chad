@@ -1,4 +1,7 @@
 class Bot:
+    """
+    Chess Bot class
+    """
 
     def __init__(self) -> None:
         pass
