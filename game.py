@@ -1,11 +1,9 @@
-from game_state import GameState
-
 class Game:
     """
     A data structure to maintain and update the game state of a chess game
     """
 
-    def __init__(self) -> None:
+    def __init__(self, board=None, turn: bool=True) -> None:
         """
         Creates a new Game object
         Sets the board to the default starting positions
@@ -14,16 +12,18 @@ class Game:
         """
         pass
 
-    def get_state(self) -> GameState:
+    def set_state(self, board, turn: bool) -> None:
         """
-        Returns the current GameState
+        Sets the game state
+        Resets the game history
+        board - may be string encoding of board (FEN) or a matrix of piece positions
+        turn - True if white to play
         """
         pass
 
-    def set_state(self, state: GameState) -> None:
+    def get_legal_moves(self) -> list[str]:
         """
-        Sets the game to the given state
-        Resets the game history
+        Returns a list with all the legal moves in the position for the correct player
         """
         pass
 

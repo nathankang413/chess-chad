@@ -1,17 +1,15 @@
-from game_state import GameState
-
 class Bot:
 
     def __init__(self) -> None:
         pass
 
-    def get_move(self, state: GameState) -> str:
+    def get_move(self, board: list[list], turn: bool, check: int, legal_moves: list[str]) -> str:
         """
-        Chooses a move from state.get_legal_moves()
+        Given the game state (board, turn, check), choose a legal move
         """
         pass
 
-    def get_eval(self, state: GameState) -> str:
+    def get_eval(self, board: list[list], turn: bool, check: int) -> str:
         """
         Returns a numeric evaluation of the game state
         Positive evaluations mean that white is better, negative means black is better
