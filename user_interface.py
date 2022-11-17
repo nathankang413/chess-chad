@@ -1,4 +1,5 @@
 from game import Game
+from bot import Bot
 from config import *
 
 class UserInterface:
@@ -13,28 +14,44 @@ class UserInterface:
         game - a game data structure to maintain and update the state and history of the game
         players - (white_player, black_player) - players may be a HUMAN_PLAYER or a Bot object
         """
-        if type(game) == Game:
+        if game is None or type(game) is Game:
             self.game = game
         else:
-            raise ValueError("game should be a Game object")
+            raise ValueError(f'{game} is not a Game object')
 
-        if type(players) == tuple and len(players) == 2:  # TODO: may need extra check for types of the players
+        if players is None or self.valid_players(players):
             self.players = players
         else:
-            raise ValueError("players should be a tuple of players")
+            raise ValueError('players is not a tuple of players')
+    
+    def valid_players(self, players) -> bool:
+        """
+        Helper function, returns True if players is a tuple of 2 valid players
+        """
+        if type(players) is not tuple or len(players != 2): return False
+
+        return all(player == HUMAN_PLAYER or isinstance(player, Bot) for player in players)
 
     def set_game(self, game: Game) -> None:
         """
         Changes the game object to the given Game
         """
-        pass
+        if type(game) is Game:
+            self.game = game
+        else:
+            raise ValueError(f'{game} is not a Game object')
 
     def set_players(self, *players) -> None:
         """
         Changes the players to the given players
         players - one (1) tuple or mutiple players (HUMAN_PLAYER or Bot object)
         """
-        pass
+        if len(players) == 2 and self.valid_players(tuple(players)):
+            self.players = tuple(players)
+        elif self.valid_players(players[0]):
+            self.players = tuple(players)
+        else:
+            raise ValueError(f'{players} does not contain 2 valid players')
 
     def run_loop(self) -> None:
         """
