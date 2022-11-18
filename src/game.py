@@ -113,6 +113,7 @@ class Game:
         - 8 x 8
         - all spaces are either empty string or one char representing a piece
         - exactly one of each king on the board
+        - no pawns on the first or last rank
         """
         valid_tokens = ['', 'r', 'n', 'b', 'q', 'k', 'p']  # lowercase version of all acceptable tokens on the board
 
