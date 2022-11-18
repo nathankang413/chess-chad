@@ -8,8 +8,8 @@ class Game:
     def __init__(self, board=None, turn: bool=True) -> None:
         """
         Creates a new Game object
-        Sets the board to the default starting positions
-        Sets the turn to white
+        Sets the board to the default starting positions, unless otherwise specified
+        Sets the turn to white, unless otehrwise specified
         Saves the entire history of the game
 
         board - may be string encoding of board (FEN) or a matrix of piece positions
@@ -112,6 +112,7 @@ class Game:
         Returns whether the board is valid:
         - 8 x 8
         - all spaces are either empty string or one char representing a piece
+        - exactly one of each king on the board
         """
         valid_tokens = ['', 'r', 'n', 'b', 'q', 'k', 'p']  # lowercase version of all acceptable tokens on the board
 
@@ -125,9 +126,19 @@ class Game:
             if len(row) != 8:
                 return False
 
+        black_king = False
+        white_king = False
         for row in board:  # Runs through every position to check only valid tokens are present
             for position in row:
                 if type(position) is not str or position.lower() not in valid_tokens:
                     return False
+                if position == 'k':
+                    if black_king:
+                        return False
+                    black_king = True
+                if position == 'K':
+                    if white_king:
+                        return False
+                    white_king = True
 
         return True  # If all previous checks for invalidity have passed, returns True
