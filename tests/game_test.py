@@ -1,5 +1,6 @@
 import unittest
 from src.game import Game
+# exec("chess-chad/src/game.py")
 
 class TestGameClass(unittest.TestCase):
 

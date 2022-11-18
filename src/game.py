@@ -1,4 +1,4 @@
-from config import *
+from src.config import *
 
 class Game:
     """
@@ -79,7 +79,26 @@ class Game:
         Returns a matrix of piece positions from a FEN string encoding
         Returns None if FEN string is invalid
         """
-        pass
+        board = [[''] * 8] * 8
+        row = 0
+        pos = 0
+        for char in fen:
+            if char == '/':  # Resets to the next row in the board
+                row += 1
+                pos = 0
+            if pos >= 8 or row >= 8:  # Checks for invalid FEN notation
+                raise ValueError("Invalid FEN String")
+            if char.isnumeric():
+                if pos + int(char) + 1 >= 8:  # Checks if FEN index goes beyond board length
+                    raise ValueError("Invalid FEN Token")
+                else:
+                    pos += int(char) + 1
+            elif char.isalpha():  # Adds character to board and moves pos to next space
+                board[row][pos] = char
+                pos += 1
+            else:  # If none of previous conditions met, means character is an invalid token
+                raise ValueError("Invalid FEN Token")
+        return board
 
     def board_to_FEN(self, board: list[list]) -> str:
         """
@@ -141,5 +160,8 @@ class Game:
                     if white_king:
                         return False
                     white_king = True
+
+        if any(token == 'p' for token in board[0]) or any(token == 'p' for token in board[1]):  # Checks for pawns in top and bottom rows
+            return False
 
         return True  # If all previous checks for invalidity have passed, returns True
