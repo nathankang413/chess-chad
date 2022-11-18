@@ -1,6 +1,6 @@
-from config import *
+from src.config import *
 # import a UserInterface class
-from game import Game
+from src.game import Game
 # import a Bot class
 
 ui = UserInterface()  # place holder, should be a subclass
