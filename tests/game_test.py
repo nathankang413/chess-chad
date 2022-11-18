@@ -282,22 +282,22 @@ class TestGameClass(unittest.TestCase):
         self.assertEqual(g.board_to_FEN(board3), fen3)
     
     def test_10_init(self):
-        pass
+        self.fail()
 
     def test_11_set_state(self):
-        pass
+        self.fail()
 
     def test_12_get_check(self):
-        pass
+        self.fail()
 
     def test_13_get_legal_moves(self):
-        pass
+        self.fail()
 
     def test_14_make_move(self):
-        pass
+        self.fail()
 
     def test_15_get_history(self):
-        pass
+        self.fail()
 
     def _check_state(self, game: Game, board: list[list], turn: bool):
         self.assertEqual(game.get_board(), board)
